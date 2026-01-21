@@ -18,8 +18,15 @@ public class AppUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true, nullable = false)
     private String username;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
