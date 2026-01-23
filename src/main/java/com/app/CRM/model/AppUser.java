@@ -1,13 +1,17 @@
 package com.app.CRM.model;
 
+import com.app.CRM.Enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.jspecify.annotations.Nullable;
+import org.springframework.boot.autoconfigure.task.TaskExecutionProperties;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "app_user")
@@ -25,12 +29,14 @@ public class AppUser implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>();
+        return List.of(
+                new SimpleGrantedAuthority("ROLE_"+role.name())
+        );
     }
 
     @Override

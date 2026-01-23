@@ -1,5 +1,6 @@
 package com.app.CRM.service;
 
+import com.app.CRM.Enums.Role;
 import com.app.CRM.model.AppUser;
 import com.app.CRM.repository.AppUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class AppUserService implements UserDetailsService {
 
     public String addUser(AppUser appUser){
         appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+        appUser.setRole(Role.EMPLOYEE);
         appUserRepo.save(appUser);
         return" User is Created Succesfully";
     }

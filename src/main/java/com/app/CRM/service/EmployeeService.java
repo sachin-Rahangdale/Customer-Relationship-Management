@@ -1,6 +1,7 @@
 package com.app.CRM.service;
 
 import com.app.CRM.Enums.EmployeeStatus;
+import com.app.CRM.Enums.Role;
 import com.app.CRM.dto.EmployeeRequestDto;
 import com.app.CRM.dto.EmployeeResponseDto;
 import com.app.CRM.exception.DepartmentNotFoundException;
@@ -39,7 +40,7 @@ public class EmployeeService {
         AppUser user = new AppUser();
         user.setUsername(employee.getUsername());
         user.setPassword(passwordEncoder.encode(employee.getPassword()));
-        user.setRole("EMPLOYEE");
+        user.setRole(Role.EMPLOYEE);
         appUserRepo.save(user);
         Employee emp = new Employee();
         emp.setName(employee.getName());
